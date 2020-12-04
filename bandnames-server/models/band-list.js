@@ -25,20 +25,26 @@ class BandList {
     }
 
     increaseVots(id) {
-        this.bands = this.bands.map(band => {
+         this.bands.map(band => {
+            console.log('entra',band);
+            console.log('id', band.id,'__',id);
             if (band.id === id) {
-                band.votes += 1;
+                band.values += 1;
             }
             return this.band;
         });
     }
 
     changeBandName(id, newName) {
-        this.bands = this.bands.map(band => {
+        console.log('id',id);
+        console.log('newName',newName);
+        console.log('ERROR:', id, newName, this.bands);
+        this.bands.map(band => {
+
             if (band.id === id) {
                 band.name = newName;
             }
-            return this.band;
+           return this.band;
         });
     }
 }

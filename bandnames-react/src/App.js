@@ -16,6 +16,7 @@ function App() {
 
 const [online, setOnline] = useState(false);
 const [socket] = useState(connectSocketServer())
+const [bands, setBands] = useState([]);
 
 useEffect(() => {
   setOnline(socket.connected)
@@ -36,6 +37,32 @@ useEffect(() => {
 }, [socket])
 
 
+useEffect(() => {
+  socket.on('current-bands', (bands)=>{
+    setBands(bands);
+  })
+}, [socket])
+
+
+const votar = (id) =>{
+  socket.emit('votar-banda',id);
+}
+
+
+const deleteBand = (id) =>{
+  console.log(id);
+  socket.emit('delete-band',id);
+}
+
+const nameBand = (id,name) =>{
+  console.log(id,name);
+  socket.emit('name-band',{id,name});
+}
+
+const newBand = (name) =>{
+  console.log(name);
+  socket.emit('new-band',name);
+}
 
   return (
     <div className="container">
@@ -55,10 +82,10 @@ useEffect(() => {
       <hr/>
       <div className="row">
         <div className="col-8">
-          <BandList/>
+          <BandList data={bands} votar={votar} deleteBand={deleteBand} nameBand={nameBand}/>
         </div>
         <div className="col-4">
-          <BandAdd/>
+          <BandAdd newBand={newBand}/>
         </div>
       </div>
     </div>
