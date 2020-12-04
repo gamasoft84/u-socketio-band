@@ -1,23 +1,66 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BandAdd } from './components/BandAdd';
+import { BandList } from './components/BandList';
+import io from 'socket.io-client'; 
+
+const connectSocketServer = () =>{
+  const socket = io.connect('http://localhost:4000',{
+    transports: ['websocket']
+  });
+  return socket;
+}
+
 
 function App() {
+
+const [online, setOnline] = useState(false);
+const [socket] = useState(connectSocketServer())
+
+useEffect(() => {
+  setOnline(socket.connected)
+}, [socket])
+
+
+useEffect(() => {
+  socket.on('connect', ()=>{
+    setOnline(true);
+  })
+}, [socket])
+
+
+useEffect(() => {
+  socket.on('disconnect', ()=>{
+    setOnline(false);
+  })
+}, [socket])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="container">
+      <div className="alert">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Service Status: {
+            online 
+            ? <span className="text-success">Online</span>
+            : <span className="text-danger">Offline</span>
+          }
+          
+          
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+
+      <h3>BandNames</h3>
+      <hr/>
+      <div className="row">
+        <div className="col-8">
+          <BandList/>
+        </div>
+        <div className="col-4">
+          <BandAdd/>
+        </div>
+      </div>
     </div>
   );
 }
