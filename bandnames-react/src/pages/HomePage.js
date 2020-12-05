@@ -1,26 +1,26 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import { BandAdd } from './components/BandAdd';
-import { BandList } from './components/BandList';
-import { useSocket } from './hooks/useSocket';
+import React, { useContext } from 'react';
+import {SocketContext} from '../context/SocketContext';
+import { BandAdd } from '../components/BandAdd';
+import { BandList } from '../components/BandList';
 
 
 
 
-function App() {
+function HomePage() {
+
+  const {online} = useContext(SocketContext);
   
-const [bands, setBands] = useState([]);
-const {socket,online} = useSocket('http://localhost:4000/');
+/* const [bands, setBands] = useState([]);
+ */
 
-
-useEffect(() => {
+/* useEffect(() => {
   socket.on('current-bands', (bands)=>{
     setBands(bands);
   })
-}, [socket])
+}, [socket]) */
 
 
-const votar = (id) =>{
+/* const votar = (id) =>{
   socket.emit('votar-banda',id);
 }
 
@@ -33,7 +33,7 @@ const deleteBand = (id) =>{
 const nameBand = (id,name) =>{
   console.log(id,name);
   socket.emit('name-band',{id,name});
-}
+} */
 
   return (
     <div className="container">
@@ -53,14 +53,14 @@ const nameBand = (id,name) =>{
       <hr/>
       <div className="row">
         <div className="col-8">
-          <BandList data={bands} votar={votar} deleteBand={deleteBand} nameBand={nameBand}/>
+         {/*  <BandList data={bands} votar={votar} deleteBand={deleteBand} nameBand={nameBand}/> */}
         </div>
         <div className="col-4">
-          <BandAdd/>
+         {/*  <BandAdd/> */}
         </div>
       </div>
     </div>
   );
 }
 
-export default App;
+export default HomePage;
