@@ -1,10 +1,10 @@
-import React,{useState}from 'react'
-import { useSocket } from '../hooks/useSocket';
+import React,{useState, useContext}from 'react'
+import { SocketContext } from '../context/SocketContext';
 
 export const BandAdd = () => {
 
     const [name, setName] = useState('');
-    const {socket,online} = useSocket('http://localhost:4000/');
+    const {socket} = useContext(SocketContext);
 
 
     const onSubmit = (ev) =>{
