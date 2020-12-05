@@ -1,15 +1,18 @@
 import React,{useState}from 'react'
+import { useSocket } from '../hooks/useSocket';
 
-export const BandAdd = ({newBand}) => {
+export const BandAdd = () => {
 
-    const [valor, setValor] = useState('');
+    const [name, setName] = useState('');
+    const {socket,online} = useSocket('http://localhost:4000/');
+
 
     const onSubmit = (ev) =>{
         ev.preventDefault();
-        console.log(valor);
-        if(valor.trim().length> 0){
-            newBand(valor);
-            setValor('');
+        console.log(name);
+        if(name.trim().length> 0){
+            socket.emit('new-band',name);
+            setName('');
         }
     }
 
@@ -19,7 +22,7 @@ export const BandAdd = ({newBand}) => {
         <>
             <h3>Add Band</h3>
             <form onSubmit={onSubmit}>
-                <input className="form-control" placeholder="Name Band" value={valor} onChange={(ev)=> setValor(ev.target.value)}/>
+                <input className="form-control" placeholder="Name Band" value={name} onChange={(ev)=> setName(ev.target.value)}/>
             </form>
 
         </>

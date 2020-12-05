@@ -61,7 +61,7 @@ const newBand = (name) =>{
           <BandList data={bands} votar={votar} deleteBand={deleteBand} nameBand={nameBand}/>
         </div>
         <div className="col-4">
-          <BandAdd newBand={newBand}/>
+          <BandAdd/>
         </div>
       </div>
     </div>
