@@ -35,11 +35,6 @@ const nameBand = (id,name) =>{
   socket.emit('name-band',{id,name});
 }
 
-const newBand = (name) =>{
-  console.log(name);
-  socket.emit('new-band',name);
-}
-
   return (
     <div className="container">
       <div className="alert">
