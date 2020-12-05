@@ -26,8 +26,6 @@ class BandList {
 
     increaseVots(id) {
          this.bands.map(band => {
-            console.log('entra',band);
-            console.log('id', band.id,'__',id);
             if (band.id === id) {
                 band.values += 1;
             }
