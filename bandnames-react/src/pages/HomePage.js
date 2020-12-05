@@ -13,27 +13,6 @@ function HomePage() {
 /* const [bands, setBands] = useState([]);
  */
 
-/* useEffect(() => {
-  socket.on('current-bands', (bands)=>{
-    setBands(bands);
-  })
-}, [socket]) */
-
-
-/* const votar = (id) =>{
-  socket.emit('votar-banda',id);
-}
-
-
-const deleteBand = (id) =>{
-  console.log(id);
-  socket.emit('delete-band',id);
-}
-
-const nameBand = (id,name) =>{
-  console.log(id,name);
-  socket.emit('name-band',{id,name});
-} */
 
   return (
     <div className="container">
@@ -53,10 +32,10 @@ const nameBand = (id,name) =>{
       <hr/>
       <div className="row">
         <div className="col-8">
-         {/*  <BandList data={bands} votar={votar} deleteBand={deleteBand} nameBand={nameBand}/> */}
+         <BandList/>
         </div>
         <div className="col-4">
-         {/*  <BandAdd/> */}
+         { <BandAdd/>}
         </div>
       </div>
     </div>
